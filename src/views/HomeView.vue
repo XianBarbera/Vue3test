@@ -1,6 +1,7 @@
+<!-- // http://localhost:4000/ -->
 <script setup>
 </script>
 
 <template>
-  <main></main>
+  <main>  <div>HOME</div></main>
 </template>

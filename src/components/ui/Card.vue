@@ -1,36 +1,49 @@
 <template>
-  <div class="card">
-    <img
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR31da5RtxSPvf2xLuMRUHuyCXV7EhCWru6x_vg6vlIChTfMiYpVHFHG8r_p6sLdCrW8sY&usqp=CAU"
-      alt="Bigote"
-    />
-    <h1>{{ title }}</h1>
-    <p>
-      {{ description }}
-    </p>
-    <Button text="SAPE" color="red" fullWidth />
+  <div class="card" @click="goToCharacter()">
+    <img :src="img" :alt="name" />
+    <h3>{{ name }}</h3>
+
+    <div class="skills-container">
+      <h4 class="skills-title">Skills</h4>
+      <div class="skills">
+        <span v-for="skill in skills">{{ skill }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Button from "@/components/ui/Button.vue";
-
 export default {
-  name: "Card",
-  components: { Button },
+  name: 'Card',
   props: {
-    title: String,
+    name: String,
     description: String,
+    img: String,
+    id: String,
+    skills: Array
   },
-};
+  methods: {
+    goToCharacter() {
+      this.$router.push({ name: 'personaje', params: { personaje: this.id } })
+    }
+  }
+}
 </script>
 
 <style scoped>
 .card {
   font-family: Arial;
   border: 1px solid #c0c0c0;
-  width: 300px;
+  width: 200px;
   border-radius: 10px;
+  text-align: center;
+  overflow: hidden;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+
+img {
+  max-height: 200px;
 }
 
 h1 {
@@ -39,9 +52,24 @@ h1 {
   margin: 20px;
 }
 
-p {
+.skills-container {
+  width: 80%;
+  margin: 0 auto;
+}
+ul,
+.skills {
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-title {
+  text-align: start;
+}
+
+li {
   color: #696969;
-  margin: 20px;
+  font-size: 15px;
+  margin: 5px 0;
 }
 
 img {
